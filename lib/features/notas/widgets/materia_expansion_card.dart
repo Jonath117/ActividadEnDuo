@@ -22,6 +22,7 @@ class MateriaExpansionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double progreso = notaFinal / 100.0;
     
     const Color ucbDarkBlue = Color(0xFF0D47A1); 
 
@@ -101,7 +102,28 @@ class MateriaExpansionCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            
+            Container(
+              height: 10,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Stack(
+                children: [
+                  FractionallySizedBox(
+                    widthFactor: progreso,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: ucbDarkBlue,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+           
           ],
         ),
       ),
