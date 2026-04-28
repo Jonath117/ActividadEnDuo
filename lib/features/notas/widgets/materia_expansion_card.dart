@@ -97,25 +97,15 @@ class _MateriaExpansionCardState extends State<MateriaExpansionCard> {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Container(
+                      SizedBox(
                         width: 100,
-                        height: 6,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: Stack(
-                          children: [
-                            FractionallySizedBox(
-                              widthFactor: progreso,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.orange[400],
-                                  borderRadius: BorderRadius.circular(3),
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: LinearProgressIndicator(
+                          value: progreso,
+                          minHeight: 6,
+                          backgroundColor: Colors.grey[200],
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.orange[400]!,
+                          ),
                         ),
                       ),
                     ],
@@ -155,24 +145,12 @@ class _MateriaExpansionCardState extends State<MateriaExpansionCard> {
               ],
             ),
             const SizedBox(height: 8),
-            Container(
-              height: 10,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Stack(
-                children: [
-                  FractionallySizedBox(
-                    widthFactor: progreso,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ucbDarkBlue,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                  ),
-                ],
+            LinearProgressIndicator(
+              value: progreso,
+              minHeight: 10,
+              backgroundColor: Colors.grey[200],
+              valueColor: AlwaysStoppedAnimation<Color>(
+                ucbDarkBlue,
               ),
             ),
             const SizedBox(height: 16),
