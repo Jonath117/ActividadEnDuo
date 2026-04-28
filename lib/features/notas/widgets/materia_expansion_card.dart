@@ -21,7 +21,8 @@ class MateriaExpansionCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
+    
     const Color ucbDarkBlue = Color(0xFF0D47A1); 
 
     return Card(
@@ -67,6 +68,38 @@ class MateriaExpansionCard extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
+            Row(
+              children: [
+                Text(
+                  'Docente: $docente',
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+                const Spacer(),
+                Text(
+                  '| Créditos: $creditos',
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            Row(
+              children: [
+                const Text(
+                  'Nota Final: ',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Text(
+                  '${notaFinal.toInt()} / 100 ',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+                ),
+                const Text(
+                  '(Aprobado)',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.green),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
 
             
           ],
