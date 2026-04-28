@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MateriaExpansionCard extends StatelessWidget {
+class MateriaExpansionCard extends StatefulWidget {
   final String materia;
   final String codigo;
   final String docente;
@@ -21,8 +21,15 @@ class MateriaExpansionCard extends StatelessWidget {
   });
 
   @override
+  State<MateriaExpansionCard> createState() => _MateriaExpansionCardState();
+}
+
+class _MateriaExpansionCardState extends State<MateriaExpansionCard> {
+  bool _isExpanded = false; 
+
+  @override
   Widget build(BuildContext context) {
-    final double progreso = notaFinal / 100.0;
+    final double progreso = widget.notaFinal / 100.0;
     
     const Color ucbDarkBlue = Color(0xFF0D47A1); 
 
@@ -33,57 +40,104 @@ class MateriaExpansionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: ucbDarkBlue.withAlpha(30),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(icono, color: ucbDarkBlue, size: 30),
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          dividerColor: Colors.transparent,
+        ),
+        child: ExpansionTile(
+          onExpansionChanged: (isExpanded) {
+            setState(() {
+              _isExpanded = isExpanded;
+            });
+          },
+          tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          leading: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: ucbDarkBlue.withAlpha(30),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(widget.icono, color: ucbDarkBlue, size: 30),
+          ),
+          title: _isExpanded
+              ? Text(
+                  widget.materia,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.materia,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const SizedBox(height: 4),
+                  ],
                 ),
-                const SizedBox(width: 16),
-                Expanded(
+          subtitle: _isExpanded
+              ? Text(
+                  widget.codigo,
+                  style: const TextStyle(color: Colors.grey, fontSize: 13),
+                )
+              : null,
+
+          trailing: _isExpanded
+              ? null 
+              : IntrinsicWidth(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        materia,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                        '${widget.notaFinal.toInt()} / 100',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
-                        codigo,
-                        style: const TextStyle(color: Colors.grey, fontSize: 13),
+                      Container(
+                        width: 100,
+                        height: 6,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: Stack(
+                          children: [
+                            FractionallySizedBox(
+                              widthFactor: progreso,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.orange[400],
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 16),
-
+          
+          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          children: [
             Row(
               children: [
                 Text(
-                  'Docente: $docente',
+                  'Docente: ${widget.docente}',
                   style: const TextStyle(color: Colors.grey, fontSize: 14),
                 ),
                 const Spacer(),
                 Text(
-                  '| Créditos: $creditos',
+                  '| Créditos: ${widget.creditos}',
                   style: const TextStyle(color: Colors.grey, fontSize: 14),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-
             Row(
               children: [
                 const Text(
@@ -91,7 +145,7 @@ class MateriaExpansionCard extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 Text(
-                  '${notaFinal.toInt()} / 100 ',
+                  '${widget.notaFinal.toInt()} / 100 ',
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
                 ),
                 const Text(
@@ -101,11 +155,10 @@ class MateriaExpansionCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-
             Container(
               height: 10,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Stack(
@@ -123,8 +176,7 @@ class MateriaExpansionCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-
-            ...parciales.map((parcial) {
+            ...widget.parciales.map((parcial) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Row(
@@ -141,7 +193,7 @@ class MateriaExpansionCard extends StatelessWidget {
                   ],
                 ),
               );
-            }),
+            }).toList(),
           ],
         ),
       ),
