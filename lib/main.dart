@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_duo/features/notas/widgets/notas_header.dart';
+import 'package:flutter_duo/features/notas/pages/notas_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,6 +10,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: NotasHeader());
+    return const MaterialApp(home: NotasPage());
   }
 }
