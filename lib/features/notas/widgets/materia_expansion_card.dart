@@ -54,7 +54,7 @@ class _MateriaExpansionCardState extends State<MateriaExpansionCard> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: ucbDarkBlue,
+              color: _isExpanded ? Colors.orange[400] : ucbDarkBlue,
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(10)
             ),
