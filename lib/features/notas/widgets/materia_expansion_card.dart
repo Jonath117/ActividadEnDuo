@@ -31,7 +31,7 @@ class _MateriaExpansionCardState extends State<MateriaExpansionCard> {
   Widget build(BuildContext context) {
     final double progreso = widget.notaFinal / 100.0;
     
-    const Color ucbDarkBlue = Color(0xFF0D47A1); 
+    const Color ucbDarkBlue = Color(0xFF003B5C); 
 
     return Card(
       elevation: 2,
@@ -54,10 +54,11 @@ class _MateriaExpansionCardState extends State<MateriaExpansionCard> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: ucbDarkBlue.withAlpha(30),
-              shape: BoxShape.circle,
+              color: ucbDarkBlue,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10)
             ),
-            child: Icon(widget.icono, color: ucbDarkBlue, size: 30),
+            child: Icon(widget.icono, color: Colors.white, size: 30),
           ),
           title: _isExpanded
               ? Text(
