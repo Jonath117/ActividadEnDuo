@@ -122,8 +122,26 @@ class MateriaExpansionCard extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 16),
 
-           
+            ...parciales.map((parcial) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    Text(
+                      '${parcial['nombre']}:',
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                    const Spacer(),
+                    Text(
+                      '${parcial['nota']}',
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                  ],
+                ),
+              );
+            }),
           ],
         ),
       ),
